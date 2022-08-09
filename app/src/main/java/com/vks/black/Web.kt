@@ -251,7 +251,7 @@ class Web : AppCompatActivity() {
         val dpOne: String? = Hawk.get(D1)
         val mainid: String = Hawk.get(MAIN_ID)
 
-        val pack = "com.hyperbeard.odysse"
+        val pack = "com.vks"
 
         val afId = AppsFlyerLib.getInstance().getAppsFlyerUID(this)
 

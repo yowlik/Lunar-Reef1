@@ -1,13 +1,16 @@
 package com.vks.black
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import androidx.activity.viewModels
 import com.appsflyer.AppsFlyerLib
 import com.orhanobut.hawk.Hawk
 import com.vks.R
+import com.vks.black.CNST.DEV
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +27,9 @@ class MainActivity : AppCompatActivity() {
             exec.putBoolean("activity_exec", true)
             exec.apply()
         }
+        Log.d("DevChecker", isDevMode(this).toString())
+        Hawk.put(DEV, isDevMode(this).toString())
+
 
 
         viewModel.deePP(this)
@@ -53,6 +59,12 @@ class MainActivity : AppCompatActivity() {
                     delay(timeInterval)
                 }
             }
+        }
+    }
+    private fun isDevMode(context: Context): Boolean {
+        return run {
+            Settings.Secure.getInt(context.contentResolver,
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0
         }
     }
 }
